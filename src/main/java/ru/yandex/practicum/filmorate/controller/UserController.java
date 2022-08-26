@@ -56,8 +56,4 @@ public class UserController {
     public List<User> getUsers() {
         return new ArrayList<>(users.values());
     }
-
-    private Boolean doValidation(LocalDate date) {
-        return !date.isAfter(LocalDate.now());
-    }
 }
