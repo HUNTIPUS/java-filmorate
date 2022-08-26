@@ -18,6 +18,7 @@ public class User {
     private Integer id;
 
     @Email
+    @NotNull
     private String email;
 
     @NotBlank
