@@ -3,30 +3,30 @@ package ru.yandex.practicum.filmorate.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.generate.GenerateIdUser;
+import ru.yandex.practicum.filmorate.generate.GenerateId;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.validation.ValidationException;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
     private final HashMap<Integer, User> users = new HashMap<>();
-    private GenerateIdUser generateIdUser = new GenerateIdUser();
+    private GenerateId generateId = new GenerateId();
 
     @PostMapping
-    public User createUser(@RequestBody @NotNull User user) {
-        if (!user.getEmail().isEmpty() && user.getEmail().contains("@")
-                && !user.getLogin().isEmpty() && !user.getLogin().contains(" ")
-                && !user.getBirthday().isAfter(LocalDate.now())) {
+    public User createUser(@RequestBody @Valid @NotNull User user) {
+        if (doValidation(user.getBirthday())) {
             if (user.getName().isEmpty()) {
                 user.setName(user.getLogin());
             }
-            user.setId(generateIdUser.getId());
+            user.setId(generateId.getId());
             users.put(user.getId(), user);
             return user;
         } else {
@@ -35,16 +35,14 @@ public class UserController {
     }
 
     @PutMapping
-    public User updateUser(@RequestBody @NotNull User user) {
-        if (!user.getEmail().isEmpty() && user.getEmail().contains("@")
-                && !user.getLogin().isEmpty() && !user.getLogin().contains(" ")
-                && !user.getBirthday().isAfter(LocalDate.now())
+    public User updateUser(@RequestBody @Valid @NotNull User user) {
+        if (doValidation(user.getBirthday())
                 && user.getId() > 0) {
             if (user.getName().isEmpty()) {
                 user.setName(user.getLogin());
             }
 
-            for (Integer id: users.keySet()) {
+            for (Integer id : users.keySet()) {
                 if (id == user.getId()) {
                     users.put(user.getId(), user);
                 }
@@ -56,7 +54,11 @@ public class UserController {
     }
 
     @GetMapping
-    public ArrayList<User> getUsers() {
+    public List<User> getUsers() {
         return new ArrayList<>(users.values());
+    }
+
+    private Boolean doValidation(LocalDate date) {
+        return !date.isAfter(LocalDate.now());
     }
 }
