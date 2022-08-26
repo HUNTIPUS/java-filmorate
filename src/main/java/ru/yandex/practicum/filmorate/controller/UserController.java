@@ -23,7 +23,7 @@ public class UserController {
     private final GenerateId generateId;
 
     @PostMapping
-    public User createUser(@RequestBody @Valid @NotNull User user) {
+    public User createUser(@RequestBody @Valid User user) {
         if (doValidate(user)) {
             user.setId(generateId.getId());
             users.put(user.getId(), user);
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PutMapping
-    public User updateUser(@RequestBody @Valid @NotNull User user) {
+    public User updateUser(@RequestBody @Valid User user) {
         if (doValidate(user) && user.getId() > 0) {
             if(users.containsKey(user.getId())) {
                 users.put(user.getId(), user);

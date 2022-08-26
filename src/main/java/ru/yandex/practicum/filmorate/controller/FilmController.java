@@ -26,7 +26,7 @@ public class FilmController {
     private final GenerateId generateId;
 
     @PostMapping
-    public Film createFilm(@RequestBody @Valid @NotNull Film film) {
+    public Film createFilm(@RequestBody @Valid Film film) {
         if (doValidation(film.getReleaseDate())) {
             film.setId(generateId.getId());
             films.put(film.getId(), film);
@@ -37,7 +37,7 @@ public class FilmController {
     }
 
     @PutMapping
-    public Film updateFilm(@RequestBody @Valid @NotNull Film film) {
+    public Film updateFilm(@RequestBody @Valid Film film) {
         if (doValidation(film.getReleaseDate()) && film.getId() > 0) {
             if (films.containsKey(film.getId())) {
                 films.put(film.getId(), film);
