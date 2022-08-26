@@ -22,22 +22,21 @@ public class UserController {
 
     @PostMapping
     public User createUser(@RequestBody @Valid @NotNull User user) {
-        if (doValidation(user.getBirthday())) {
+        try {
             if (user.getName().isEmpty()) {
                 user.setName(user.getLogin());
             }
             user.setId(generateId.getId());
             users.put(user.getId(), user);
             return user;
-        } else {
+        } catch (ValidationException e){
             throw new ValidationException("Не удалось добавить пользователя");
         }
     }
 
     @PutMapping
     public User updateUser(@RequestBody @Valid @NotNull User user) {
-        if (doValidation(user.getBirthday())
-                && user.getId() > 0) {
+        if (user.getId() > 0) {
             if (user.getName().isEmpty()) {
                 user.setName(user.getLogin());
             }
