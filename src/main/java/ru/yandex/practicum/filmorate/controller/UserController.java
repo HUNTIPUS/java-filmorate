@@ -2,61 +2,62 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.generate.GenerateId;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.validation.ValidationException;
+import ru.yandex.practicum.filmorate.service.UserService;
+import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
 @Slf4j
 @RequiredArgsConstructor
 public class UserController {
-    private final Map<Integer, User> users = new HashMap<>();
-    private final GenerateId generateId;
+
+    private final InMemoryUserStorage userStorage;
+    private final UserService userService;
 
     @PostMapping
     public User createUser(@RequestBody @Valid User user) {
-        if (doValidate(user)) {
-            user.setId(generateId.getId());
-            users.put(user.getId(), user);
-            return user;
-        } else {
-            throw new ValidationException("Не удалось создать пользователя");
-        }
+        return userStorage.createUser(user);
     }
 
     @PutMapping
     public User updateUser(@RequestBody @Valid User user) {
-        if (doValidate(user) && user.getId() > 0) {
-            if(users.containsKey(user.getId())) {
-                users.put(user.getId(), user);
-            }
-            return user;
-        } else {
-            throw new ValidationException("Не удалось обновить пользователя");
-        }
+        return userStorage.updateUser(user);
     }
 
     @GetMapping
     public List<User> getUsers() {
-        return new ArrayList<>(users.values());
+        return userStorage.getUsers();
+    }
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") Integer userId) {
+        return userStorage.getUserById(userId);
     }
 
-    private Boolean doValidate(User user) {
-        if (!user.getLogin().contains(" ")) {
-            if (user.getName().isBlank()) {
-                user.setName(user.getLogin());
-            }
-            return true;
-        }
-        return false;
+    @PutMapping("/{id}/friends/{friendId}")
+    public void addFriend(@PathVariable("id") Integer userId,
+                          @PathVariable("friendId") Integer friendId) {
+        userService.addFriend(userId, friendId, userStorage.getUsers());
+    }
+
+    @DeleteMapping("/{id}/friends/{friendId}")
+    public void deleteFriend(@PathVariable("id") Integer userId,
+                             @PathVariable("friendId") Integer friendId) {
+        userService.deleteFriend(userId, friendId, userStorage.getUsers());
+    }
+
+    @GetMapping("/{id}/friends")
+    public List<User> getFriends(@PathVariable("id") Integer userId) {
+        return userService.getFriends(userId, userStorage.getUsers());
+    }
+
+    @GetMapping("/{id}/friends/common/{otherId}")
+    public List<User> getCommonFriends(@PathVariable("id") Integer userId,
+                                       @PathVariable("otherId") Integer friendId) {
+        return userService.getCommonFriends(userId, friendId, userStorage.getUsers());
     }
 }

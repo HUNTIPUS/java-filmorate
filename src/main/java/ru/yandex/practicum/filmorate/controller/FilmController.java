@@ -3,57 +3,58 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.generate.GenerateId;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.validation.ValidationException;
+import ru.yandex.practicum.filmorate.service.FilmService;
+import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/films")
 @Slf4j
 @RequiredArgsConstructor
 public class FilmController {
-    private final Map<Integer, Film> films = new HashMap<>();
-    private final LocalDate START_DATA_FILM = LocalDate.of(1895, 12, 28);
-    private final GenerateId generateId;
+    private final InMemoryFilmStorage filmStorage;
+    private final FilmService filmService;
 
     @PostMapping
     public Film createFilm(@RequestBody @Valid Film film) {
-        if (doValidation(film.getReleaseDate())) {
-            film.setId(generateId.getId());
-            films.put(film.getId(), film);
-            return film;
-        } else {
-            throw new ValidationException("Не удалось добавить фильм");
-        }
+        return filmStorage.createFilm(film);
     }
 
     @PutMapping
     public Film updateFilm(@RequestBody @Valid Film film) {
-        if (doValidation(film.getReleaseDate()) && film.getId() > 0) {
-            if (films.containsKey(film.getId())) {
-                films.put(film.getId(), film);
-            }
-            return film;
-        } else {
-            throw new ValidationException("Не удалось обновить фильм");
-        }
+        return filmStorage.updateFilm(film);
     }
 
     @GetMapping
     public List<Film> getFilms() {
-        return new ArrayList<>(films.values());
+        return filmStorage.getFilms();
     }
 
-    private Boolean doValidation(LocalDate dateFilm) {
-        return !dateFilm.isBefore(START_DATA_FILM);
+    @GetMapping("/{id}")
+    public Film getFilmById(@PathVariable("id") Integer filmId) {
+        return filmStorage.getFilmById(filmId);
+    }
+
+    @PutMapping("/{id}/like/{userId}")
+    public void addLikeToFilm(@PathVariable("userId") Integer userId,
+                              @PathVariable("id") Integer idFilm) {
+        filmService.addLikeToFilm(userId, idFilm, filmStorage.getFilms());
+    }
+
+    @DeleteMapping("/{id}/like/{userId}")
+    public void deleteLikeToFilm(@PathVariable("userId") Integer userId,
+                                 @PathVariable("id") Integer idFilm) {
+        filmService.deleteLikeToFilm(userId, idFilm, filmStorage.getFilms());
+    }
+
+    @GetMapping("/popular")
+    public List<Film> getTopTenFilmsWithoutParametrs(@RequestParam(required = false) Integer count) {
+        return filmService.getTopTenFilms(filmStorage.getFilms(), count);
     }
 }
