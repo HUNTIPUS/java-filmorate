@@ -34,18 +34,13 @@ public class Film {
 
     private List<Integer> usersWhichLikeFilm = new ArrayList<>();
 
-    public void addLikes() {
+    public void addLikes(Integer idUser) {
         countLikes++;
-    }
-    public void addUsersWhichLikeFilm(Integer idUser) {
         usersWhichLikeFilm.add(idUser);
     }
 
-    public void deleteLikes() {
+    public void deleteLikes(Integer idUser) {
         countLikes--;
-    }
-
-    public void deleteLikeByUser(Integer idUser) {
         usersWhichLikeFilm.remove(idUser);
     }
 }

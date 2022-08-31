@@ -35,8 +35,7 @@ public class FilmService {
     public void addLikeToFilm(Integer userId, Integer filmId) {
         Film film = getFilmById(filmId);
         if (!film.getUsersWhichLikeFilm().contains(userId)) {
-            film.addLikes();
-            film.addUsersWhichLikeFilm(userId);
+            film.addLikes(userId);
         } else {
             throw new ValidationException(String.format("Пользователь № %d уже поставил лайк", userId));
         }
@@ -45,22 +44,16 @@ public class FilmService {
     public void deleteLikeToFilm(Integer userId, Integer filmId) {
         Film film = getFilmById(filmId);
         if (film.getUsersWhichLikeFilm().contains(userId)) {
-            film.deleteLikes();
-            film.deleteLikeByUser(userId);
+            film.deleteLikes(userId);
         } else {
             throw new ValidationException(String.format("Пользователь № %d уже убрал лайк", userId));
         }
     }
 
     public List<Film> getTopTenFilms(Integer numberForTop) {
-        List<Film> films = getFilms().stream()
+        return getFilms().stream()
                 .sorted(Comparator.comparingInt(Film::getCountLikes).reversed())
                 .limit(numberForTop)
                 .collect(Collectors.toList());
-
-        if (films.size() < numberForTop) {
-            return films;
-        }
-        return films.subList(0, numberForTop);
     }
 }

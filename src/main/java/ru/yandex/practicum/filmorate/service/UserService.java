@@ -61,25 +61,16 @@ public class UserService {
     }
 
     public List<User> getFriends(Integer userId) {
-            User user = getUserById(userId);
-            List<User> friends = new ArrayList<>();
-            for (Integer id : user.getFriends()) {
-                friends.add(getUserById(id));
-            }
-            return friends;
+        User user = getUserById(userId);
+        return user.getFriends().stream().map(this::getUserById).collect(Collectors.toList());
     }
 
     public List<User> getCommonFriends(Integer userId, Integer friendId) {
-            User user = getUserById(userId);
-            User friend = getUserById(friendId);
-            List<Integer> idCommonFriends = user.getFriends().stream()
-                    .distinct()
-                    .filter(friend.getFriends()::contains)
-                    .collect(Collectors.toList());
-            List<User> commonFriends = new ArrayList<>();
-            for (Integer id : idCommonFriends) {
-                commonFriends.add(getUserById(id));
-            }
-            return commonFriends;
+        User user = getUserById(userId);
+        User friend = getUserById(friendId);
+        return user.getFriends().stream()
+                .filter(friend.getFriends()::contains)
+                .map(this::getUserById)
+                .collect(Collectors.toList());
     }
 }
