@@ -1,16 +1,12 @@
 package ru.yandex.practicum.filmorate.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.server.ResponseStatusException;
+import ru.yandex.practicum.filmorate.exception.ObjectExcistenceException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.UserStorage;
 import ru.yandex.practicum.filmorate.validation.ValidationException;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,14 +15,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final InMemoryUserStorage userStorage;
+    private final UserStorage userStorage;
 
-    public User createUser(@RequestBody @Valid User user) {
+    public User createUser(User user) {
         return userStorage.createUser(user);
     }
 
 
-    public User updateUser(@RequestBody @Valid User user) {
+    public User updateUser(User user) {
         return userStorage.updateUser(user);
     }
 
@@ -35,67 +31,55 @@ public class UserService {
         return userStorage.getUsers();
     }
 
-    public User getUserById(@PathVariable("id") Integer userId) {
-        return userStorage.getUserById(userId);
+    public User getUserById(Integer userId) {
+        return userStorage.getUserById(userId)
+                .orElseThrow(() -> new ObjectExcistenceException("Пользователь не существует"));
     }
 
     public void addFriend(Integer userId, Integer friendId) {
-        List<User> users = getUsers();
-        User user = findById(userId, users);
-        User friend = findById(friendId, users);
-        if (!user.getFriends().contains(friend)) {
+        User user = getUserById(userId);
+        User friend = getUserById(friendId);
+        if (!user.getFriends().contains(friend.getId())) {
             user.addFriends(friendId);
             friend.addFriends(userId);
         } else {
-            throw new UnsupportedOperationException(String.format("Пользователь № %d уже у вас в друзьях", userId));
+            throw new ValidationException(String.format("Пользователь № %d уже у вас в друзьях", userId));
         }
     }
 
     public void deleteFriend(Integer userId, Integer friendId) {
-
-            List<User> users = getUsers();
-            User user = findById(userId, users);
-            User friend = findById(friendId, users);
+            User user = getUserById(userId);
+            User friend = getUserById(friendId);
 
             if (user.getFriends().contains(friendId)) {
                 user.deleteFriend(friendId);
                 friend.deleteFriend(userId);
             } else {
-                throw new UnsupportedOperationException(String.format("Пользователь № %d уже удален из ваших друзей", userId));
+                throw new ValidationException(String.format("Пользователь № %d уже удален из ваших друзей", userId));
             }
 
     }
 
     public List<User> getFriends(Integer userId) {
-            List<User> users = getUsers();
-            User user = findById(userId, users);
+            User user = getUserById(userId);
             List<User> friends = new ArrayList<>();
             for (Integer id : user.getFriends()) {
-                friends.add(findById(id, users));
+                friends.add(getUserById(id));
             }
             return friends;
     }
 
     public List<User> getCommonFriends(Integer userId, Integer friendId) {
-
-            List<User> users = getUsers();
-            User user = findById(userId, users);
-            User friend = findById(friendId, users);
+            User user = getUserById(userId);
+            User friend = getUserById(friendId);
             List<Integer> idCommonFriends = user.getFriends().stream()
                     .distinct()
                     .filter(friend.getFriends()::contains)
                     .collect(Collectors.toList());
             List<User> commonFriends = new ArrayList<>();
             for (Integer id : idCommonFriends) {
-                commonFriends.add(findById(id, users));
+                commonFriends.add(getUserById(id));
             }
             return commonFriends;
-    }
-
-    private User findById(Integer userId, List<User> users) {
-        return users.stream()
-                .filter(x -> x.getId().equals(userId))
-                .findFirst()
-                .orElseThrow(() -> new ValidationException(String.format("Пользователь № %d не найден", userId)));
     }
 }
