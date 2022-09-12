@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import ru.yandex.practicum.filmorate.characteristicsFilm.Genre;
+import ru.yandex.practicum.filmorate.characteristicsFilm.MotionPictureAssociation;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -31,6 +33,12 @@ public class Film {
 
     @Min(0)
     private Integer countLikes = 0;
+
+    @NotBlank
+    private Genre genre;
+
+    @NotBlank
+    private MotionPictureAssociation mpa;
 
     private List<Integer> usersWhichLikeFilm = new ArrayList<>();
 
