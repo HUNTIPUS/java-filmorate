@@ -1,0 +1,159 @@
+2022-09-21 15:43:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count[*](FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10"
+Syntax error in SQL statement "select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count[*](FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10"; SQL statement:
+select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count(FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10 [42000-214]
+2022-09-21 15:43:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count[*](FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 1"
+Syntax error in SQL statement "select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count[*](FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 1"; SQL statement:
+select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count(FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 1 [42000-214]
+2022-09-21 15:43:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count[*](FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10"
+Syntax error in SQL statement "select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count[*](FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10"; SQL statement:
+select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME       count(FU.USER_ID) from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10 [42000-214]
+2022-09-21 15:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into USERS (EMAIL, LOGIN, USER_NAME, BIRTHDAY) values (?, ?, ?, ?) [42104-214]
+2022-09-21 15:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+update USERS set EMAIL = ?, LOGIN = ?, USER_NAME = ?, BIRTHDAY = ? where USER_ID = ? [42104-214]
+2022-09-21 15:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from USERS [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into USERS (EMAIL, LOGIN, USER_NAME, BIRTHDAY) values (?, ?, ?, ?) [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+insert into USERS (EMAIL, LOGIN, USER_NAME, BIRTHDAY) values (?, ?, ?, ?) [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from FRIENDS F2 inner join USERS U on U.USER_ID = F2.SECOND_USER_ID where F2.STATUS_ID = 2 and F2.FIRST_USER_ID = 1and F2.SECOND_USER_ID IN (     select F1.SECOND_USER_ID     from FRIENDS F1     where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = 2) [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from USERS join FRIENDS F on USERS.USER_ID = F.FIRST_USER_ID join USERS U on F.SECOND_USER_ID = U.USER_ID where F.STATUS_ID = 2 and F.FIRST_USER_ID = 1 [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from USERS join FRIENDS F on USERS.USER_ID = F.FIRST_USER_ID join USERS U on F.SECOND_USER_ID = U.USER_ID where F.STATUS_ID = 2 and F.FIRST_USER_ID = 2 [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from FRIENDS F2 inner join USERS U on U.USER_ID = F2.SECOND_USER_ID where F2.STATUS_ID = 2 and F2.FIRST_USER_ID = 1and F2.SECOND_USER_ID IN (     select F1.SECOND_USER_ID     from FRIENDS F1     where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = 2) [42104-214]
+2022-09-21 15:47:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from USERS join FRIENDS F on USERS.USER_ID = F.FIRST_USER_ID join USERS U on F.SECOND_USER_ID = U.USER_ID where F.STATUS_ID = 2 and F.FIRST_USER_ID = 1 [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from USERS join FRIENDS F on USERS.USER_ID = F.FIRST_USER_ID join USERS U on F.SECOND_USER_ID = U.USER_ID where F.STATUS_ID = 2 and F.FIRST_USER_ID = 2 [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from FRIENDS F2 inner join USERS U on U.USER_ID = F2.SECOND_USER_ID where F2.STATUS_ID = 2 and F2.FIRST_USER_ID = 1and F2.SECOND_USER_ID IN (     select F1.SECOND_USER_ID     from FRIENDS F1     where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = 2) [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select * from users where user_id = ? [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from FRIENDS F2 inner join USERS U on U.USER_ID = F2.SECOND_USER_ID where F2.STATUS_ID = 2 and F2.FIRST_USER_ID = 1and F2.SECOND_USER_ID IN (     select F1.SECOND_USER_ID     from FRIENDS F1     where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = 2) [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FRIENDS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from FRIENDS F2 inner join USERS U on U.USER_ID = F2.SECOND_USER_ID where F2.STATUS_ID = 2 and F2.FIRST_USER_ID = 2and F2.SECOND_USER_ID IN (     select F1.SECOND_USER_ID     from FRIENDS F1     where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = 1) [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select U.USER_ID,       U.EMAIL,       U.LOGIN,       U.USER_NAME,       U.BIRTHDAY from USERS join FRIENDS F on USERS.USER_ID = F.FIRST_USER_ID join USERS U on F.SECOND_USER_ID = U.USER_ID where F.STATUS_ID = 2 and F.FIRST_USER_ID = 1 [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID [42104-214]
+2022-09-21 15:47:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+insert into FILMS (TITLE, DESCRIPTION, RELEASE_DATE, DURATION, MOTION_PICTURE_ASSOCIATION_ID) values(?, ?, ?, ?, ?) [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+update FILMS set TITLE = ?, DESCRIPTION = ?, RELEASE_DATE = ?, DURATION = ?, MOTION_PICTURE_ASSOCIATION_ID = ? where FILM_ID = ? [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME,       count(FU.USER_ID) from FILMS F left join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10 [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+insert into FILMS (TITLE, DESCRIPTION, RELEASE_DATE, DURATION, MOTION_PICTURE_ASSOCIATION_ID) values(?, ?, ?, ?, ?) [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME,       count(FU.USER_ID) from FILMS F left join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 1 [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select F.FILM_ID,       F.TITLE,       F.DESCRIPTION,       F.RELEASE_DATE,       F.DURATION,       M.MPA_ID,       M.MPA_NAME,       count(FU.USER_ID) from FILMS F left join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID left join FILM_USER FU on F.FILM_ID = FU.FILM_ID group by F.FILM_ID order by count(FU.USER_ID) desc limit 10 [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOTION_PICTURE_ASSOCIATION" not found (this database is empty); SQL statement:
+select * from MOTION_PICTURE_ASSOCIATION where MPA_ID = ? [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOTION_PICTURE_ASSOCIATION" not found (this database is empty); SQL statement:
+select * from MOTION_PICTURE_ASSOCIATION where MPA_ID = ? [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOTION_PICTURE_ASSOCIATION" not found (this database is empty); SQL statement:
+select * from MOTION_PICTURE_ASSOCIATION [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "GENRES" not found (this database is empty); SQL statement:
+select * from GENRES where GENRE_ID = ? [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "GENRES" not found (this database is empty); SQL statement:
+select * from GENRES where GENRE_ID = ? [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "GENRES" not found (this database is empty); SQL statement:
+select * from GENRES [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+update FILMS set TITLE = ?, DESCRIPTION = ?, RELEASE_DATE = ?, DURATION = ?, MOTION_PICTURE_ASSOCIATION_ID = ? where FILM_ID = ? [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+update FILMS set TITLE = ?, DESCRIPTION = ?, RELEASE_DATE = ?, DURATION = ?, MOTION_PICTURE_ASSOCIATION_ID = ? where FILM_ID = ? [42104-214]
+2022-09-21 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+update FILMS set TITLE = ?, DESCRIPTION = ?, RELEASE_DATE = ?, DURATION = ?, MOTION_PICTURE_ASSOCIATION_ID = ? where FILM_ID = ? [42104-214]
+2022-09-21 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
+2022-09-21 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+update FILMS set TITLE = ?, DESCRIPTION = ?, RELEASE_DATE = ?, DURATION = ?, MOTION_PICTURE_ASSOCIATION_ID = ? where FILM_ID = ? [42104-214]
+2022-09-21 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FILMS" not found (this database is empty); SQL statement:
+select * from FILMS F join MOTION_PICTURE_ASSOCIATION M on F.MOTION_PICTURE_ASSOCIATION_ID = M.MPA_ID where film_id = ? [42104-214]
