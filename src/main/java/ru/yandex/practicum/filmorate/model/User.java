@@ -3,7 +3,6 @@ package ru.yandex.practicum.filmorate.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.yandex.practicum.filmorate.characteristicsUser.Status;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -33,9 +32,19 @@ public class User {
     @PastOrPresent
     private LocalDate birthday;
 
-    private Status friendship;
-
     private List<Integer> friends = new ArrayList<>();
+
+    public User(int user_id, String email, String login, String name, LocalDate birthday) {
+        this.id = user_id;
+        this.email = email;
+        this.login = login;
+        this.name = name;
+        this.birthday = birthday;
+    }
+
+    public List<Integer> getFriends() {
+        return friends;
+    }
 
     public void addFriends(Integer friendId) {
         friends.add(friendId);

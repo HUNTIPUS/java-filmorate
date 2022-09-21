@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import ru.yandex.practicum.filmorate.characteristicsFilm.Genre;
-import ru.yandex.practicum.filmorate.characteristicsFilm.MotionPictureAssociation;
+import ru.yandex.practicum.filmorate.characteristicsForFilm.Genre;
+import ru.yandex.practicum.filmorate.characteristicsForFilm.Mpa;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -34,17 +34,28 @@ public class Film {
     @Min(0)
     private Integer countLikes = 0;
 
-    @NotBlank
-    private Genre genre;
+    private List<Genre> genres = new ArrayList<>();
+    private Mpa mpa;
 
-    @NotBlank
-    private MotionPictureAssociation mpa;
+    private List<User> usersWhichLikeFilm = new ArrayList<>();
 
-    private List<Integer> usersWhichLikeFilm = new ArrayList<>();
+    public Film(int film_id,
+                String title,
+                String description,
+                LocalDate release_date,
+                int duration,
+                Mpa mpa) {
+        this.id = film_id;
+        this.name = title;
+        this.description = description;
+        this.releaseDate = release_date;
+        this.duration = duration;
+        this.mpa = mpa;
+    }
 
-    public void addLikes(Integer idUser) {
+    public void addLikes(User user) {
         countLikes++;
-        usersWhichLikeFilm.add(idUser);
+        usersWhichLikeFilm.add(user);
     }
 
     public void deleteLikes(Integer idUser) {

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.storage;
+package ru.yandex.practicum.filmorate.storage.dal;
 
 import ru.yandex.practicum.filmorate.characteristicsForFilm.Mpa;
 
