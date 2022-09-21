@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,5 +31,15 @@ public class User {
     @NotNull
     @PastOrPresent
     private LocalDate birthday;
+
+    private List<Integer> friends = new ArrayList<>();
+
+    public void addFriends(Integer friendId) {
+        friends.add(friendId);
+    }
+
+    public void deleteFriend(Integer friendId) {
+        friends.remove(friendId);
+    }
 
 }

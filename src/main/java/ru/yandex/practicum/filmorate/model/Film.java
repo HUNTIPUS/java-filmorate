@@ -5,11 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,4 +29,18 @@ public class Film {
     @Positive
     private long duration;
 
+    @Min(0)
+    private Integer countLikes = 0;
+
+    private List<Integer> usersWhichLikeFilm = new ArrayList<>();
+
+    public void addLikes(Integer idUser) {
+        countLikes++;
+        usersWhichLikeFilm.add(idUser);
+    }
+
+    public void deleteLikes(Integer idUser) {
+        countLikes--;
+        usersWhichLikeFilm.remove(idUser);
+    }
 }
