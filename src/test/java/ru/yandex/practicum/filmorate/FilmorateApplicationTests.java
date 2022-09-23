@@ -29,38 +29,6 @@ class FilmorateApplicationTests {
 
 	private final UserDbStorage userDbStorage;
 	private final FilmDbStorage filmDbStorage;
-	private final FriendStorage friendStorage;
-
-	@Test
-	public void testUpdateUser() {
-		User user = new User(1, "ghbgh@mail.ru",
-				"ghbghgb", "ghbgh", LocalDate.of(2015, 12, 11));
-
-		userDbStorage.createUser(user);
-
-		User newUser = new User(1, "ghbgh@mail.ru",
-				"ffff", "ffff", LocalDate.of(2015, 12, 11));
-
-		userDbStorage.updateUser(newUser);
-		assertEquals(newUser, userDbStorage.getUserById(1).orElseThrow(() -> new ObjectExcistenceException("-")));
-	}
-
-	@Test
-	public void testGetUserById() {
-
-		User newUser = new User(1, "ghbgh@mail.ru",
-				"ghbghgb", "ghbgh", LocalDate.of(2015, 12, 11));
-
-		userDbStorage.createUser(newUser);
-
-		Optional<User> userOptional = userDbStorage.getUserById(1);
-
-		assertThat(userOptional)
-				.isPresent()
-				.hasValueSatisfying(user ->
-						assertThat(user).hasFieldOrPropertyWithValue("id", 1)
-				);
-	}
 
 	@Test
 	public void testGetUsers() {
@@ -72,27 +40,6 @@ class FilmorateApplicationTests {
 
 		userDbStorage.createUser(user);
 		assertEquals(users, userDbStorage.getUsers());
-	}
-
-	@Test
-	public void testGetCommonFriends() {
-		User user = new User(1, "ghbgh@mail.ru",
-				"ffff", "ffff", LocalDate.of(2015, 12, 11));
-
-		User newUser = new User(2, "ghbgh@mail.ru",
-				"ffff", "ffff", LocalDate.of(2015, 12, 11));
-
-		User newUser3 = new User(3, "ghbgh@mail.ru",
-				"ffff", "ffff", LocalDate.of(2015, 12, 11));
-
-		userDbStorage.createUser(user);
-		userDbStorage.createUser(newUser);
-
-		friendStorage.addFriend(1, 2, 2);
-		friendStorage.addFriend(1, 3, 2);
-		friendStorage.addFriend(2, 3, 2);
-
-		assertEquals(newUser3, friendStorage.getCommonFriends(1, 2).get(0));
 	}
 
 	@Test
