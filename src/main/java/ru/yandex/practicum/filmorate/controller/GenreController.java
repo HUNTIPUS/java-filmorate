@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.yandex.practicum.filmorate.characteristicsForFilm.Genre;
 import ru.yandex.practicum.filmorate.service.GenreService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/genres")
-@Validated
 public class GenreController {
 
     private final GenreService genreService;

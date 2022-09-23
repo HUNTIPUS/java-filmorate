@@ -9,6 +9,7 @@ import ru.yandex.practicum.filmorate.characteristicsForFilm.Mpa;
 import ru.yandex.practicum.filmorate.exception.ObjectExcistenceException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.storage.dal.FriendStorage;
 import ru.yandex.practicum.filmorate.storage.dao.FilmDbStorage;
 import ru.yandex.practicum.filmorate.storage.dao.UserDbStorage;
 
@@ -28,6 +29,7 @@ class FilmorateApplicationTests {
 
 	private final UserDbStorage userDbStorage;
 	private final FilmDbStorage filmDbStorage;
+	private final FriendStorage friendStorage;
 
 	@Test
 	public void testUpdateUser() {
@@ -86,11 +88,11 @@ class FilmorateApplicationTests {
 		userDbStorage.createUser(user);
 		userDbStorage.createUser(newUser);
 
-		userDbStorage.addFriend(1, 2, 2);
-		userDbStorage.addFriend(1, 3, 2);
-		userDbStorage.addFriend(2, 3, 2);
+		friendStorage.addFriend(1, 2, 2);
+		friendStorage.addFriend(1, 3, 2);
+		friendStorage.addFriend(2, 3, 2);
 
-		assertEquals(newUser3, userDbStorage.getCommonFriends(1, 2).get(0));
+		assertEquals(newUser3, friendStorage.getCommonFriends(1, 2).get(0));
 	}
 
 	@Test
