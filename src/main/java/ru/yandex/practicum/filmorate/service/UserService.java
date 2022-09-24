@@ -37,31 +37,21 @@ public class UserService {
     }
 
     public void addFriend(Integer userId, Integer friendId) {
-        User user = getUserById(userId);
+        getUserById(userId);
         User friend = getUserById(friendId);
-        if (!friendStorage.getFriends(userId).contains(friend) &&
-                !friendStorage.getFriends(friendId).contains(user)) {
-            friendStorage.addFriend(userId, friendId, 2);
-            friendStorage.addFriend(friendId, userId, 1);
-        } else if (!friendStorage.getFriends(userId).contains(friend) &&
-                friendStorage.getFriends(friendId).contains(user)) {
-            friendStorage.updateStatusFriendship(userId, friendId, 2);
-        } else if (friendStorage.getFriends(userId).contains(friend)) {
+        if (!friendStorage.getFriends(userId).contains(friend)) {
+            friendStorage.addFriend(userId, friendId);
+        } else {
             throw new ValidationException(String.format("Пользователь № %d уже у вас в друзьях", userId));
         }
     }
 
     public void deleteFriend(Integer userId, Integer friendId) {
-        User user = getUserById(userId);
+        getUserById(userId);
         User friend = getUserById(friendId);
-        if (friendStorage.getFriends(userId).contains(friend) &&
-                friendStorage.getFriends(friendId).contains(user)) {
-            friendStorage.updateStatusFriendship(userId, friendId, 1);
-        } else if (friendStorage.getFriends(userId).contains(friend) &&
-                !friendStorage.getFriends(friendId).contains(user)) {
+        if (friendStorage.getFriends(userId).contains(friend)) {
             friendStorage.deleteFriend(userId, friendId);
-            friendStorage.deleteFriend(friendId, userId);
-        } else if (!friendStorage.getFriends(userId).contains(friend)) {
+        } else {
             throw new ValidationException(String.format("Пользователь № %d уже удален из ваших друзей", userId));
         }
 

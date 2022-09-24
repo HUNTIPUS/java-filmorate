@@ -18,20 +18,12 @@ public class FriendDaoImpl implements FriendStorage {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public void addFriend(Integer userId, Integer friendId, Integer statusId) {
+    public void addFriend(Integer userId, Integer friendId) {
         String sql =
-                "insert into FRIENDS (FIRST_USER_ID, SECOND_USER_ID, STATUS_ID) " +
-                        "values (?, ?, ?)";
+                "insert into FRIENDS (FIRST_USER_ID, SECOND_USER_ID) " +
+                        "values (?, ?)";
 
-        jdbcTemplate.update(sql, userId, friendId, statusId);
-    }
-
-    @Override
-    public void updateStatusFriendship (Integer userId, Integer friendId, Integer statusId) {
-        String sql =
-                "update FRIENDS set STATUS_ID = ? where " +
-                        "FIRST_USER_ID = ? and SECOND_USER_ID = ?";
-        jdbcTemplate.update(sql, statusId, userId, friendId);
+        jdbcTemplate.update(sql, userId, friendId);
     }
 
     @Override
@@ -52,7 +44,7 @@ public class FriendDaoImpl implements FriendStorage {
                         "from USERS " +
                         "join FRIENDS F on USERS.USER_ID = F.FIRST_USER_ID " +
                         "join USERS U on F.SECOND_USER_ID = U.USER_ID " +
-                        "where F.STATUS_ID = 2 and F.FIRST_USER_ID = ?";
+                        "where F.FIRST_USER_ID = ?";
 
         return jdbcTemplate.query(sql, FriendDaoImpl::makeUser, userId);
     }
@@ -67,12 +59,11 @@ public class FriendDaoImpl implements FriendStorage {
                         "       U.BIRTHDAY " +
                         "from FRIENDS F2 " +
                         "inner join USERS U on U.USER_ID = F2.SECOND_USER_ID " +
-                        "where F2.STATUS_ID = 2 " +
-                        "and F2.FIRST_USER_ID = ?" +
+                        "where F2.FIRST_USER_ID = ?" +
                         " and F2.SECOND_USER_ID IN ( " +
                         "    select F1.SECOND_USER_ID " +
                         "    from FRIENDS F1 " +
-                        "    where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = ?)";
+                        "    where F1.FIRST_USER_ID = ?)";
 
         return jdbcTemplate.query(sql, FriendDaoImpl::makeUser, userId, friendId);
     }

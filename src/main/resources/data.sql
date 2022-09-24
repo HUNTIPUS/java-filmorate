@@ -13,10 +13,6 @@ values ('G'),
        ('R'),
        ('NC-17');
 
-insert into status_friendship(status_name)
-values ('Не подтвержденный'),
-       ('Подтвержденный');
-
 -- drop table if exists users cascade;
 -- drop table if exists films cascade;
 -- drop table if exists likes;
