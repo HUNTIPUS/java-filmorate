@@ -21,9 +21,9 @@ public class MpaDaoImpl implements MpaStorage {
 
     @Override
     public Optional<Mpa> getMpaById(Integer mpaId) {
-        String sql = "select * from MOTION_PICTURE_ASSOCIATION where MPA_ID = " + mpaId;
+        String sql = "select * from MOTION_PICTURE_ASSOCIATION where MPA_ID = ?";
 
-        final List<Mpa> mpa = jdbcTemplate.query(sql, MpaDaoImpl::makeMpa);
+        final List<Mpa> mpa = jdbcTemplate.query(sql, MpaDaoImpl::makeMpa, mpaId);
 
         if (mpa.size() != 1) {
             log.info("Возрастное ограничение с id = {} не найдено", mpaId);

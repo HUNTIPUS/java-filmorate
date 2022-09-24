@@ -52,9 +52,9 @@ public class FriendDaoImpl implements FriendStorage {
                         "from USERS " +
                         "join FRIENDS F on USERS.USER_ID = F.FIRST_USER_ID " +
                         "join USERS U on F.SECOND_USER_ID = U.USER_ID " +
-                        "where F.STATUS_ID = 2 and F.FIRST_USER_ID = " + userId;
+                        "where F.STATUS_ID = 2 and F.FIRST_USER_ID = ?";
 
-        return jdbcTemplate.query(sql, FriendDaoImpl::makeUser);
+        return jdbcTemplate.query(sql, FriendDaoImpl::makeUser, userId);
     }
 
     @Override
@@ -68,13 +68,13 @@ public class FriendDaoImpl implements FriendStorage {
                         "from FRIENDS F2 " +
                         "inner join USERS U on U.USER_ID = F2.SECOND_USER_ID " +
                         "where F2.STATUS_ID = 2 " +
-                        "and F2.FIRST_USER_ID = " + userId +
+                        "and F2.FIRST_USER_ID = ?" +
                         " and F2.SECOND_USER_ID IN ( " +
                         "    select F1.SECOND_USER_ID " +
                         "    from FRIENDS F1 " +
-                        "    where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = " + friendId + ")";
+                        "    where F1.STATUS_ID = 2 and F1.FIRST_USER_ID = ?)";
 
-        return jdbcTemplate.query(sql, FriendDaoImpl::makeUser);
+        return jdbcTemplate.query(sql, FriendDaoImpl::makeUser, userId, friendId);
     }
 
     private static User makeUser(ResultSet rs, int rowNum) throws SQLException {

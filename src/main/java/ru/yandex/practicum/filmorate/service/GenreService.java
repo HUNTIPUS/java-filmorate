@@ -4,18 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.characteristicsForFilm.Genre;
 import ru.yandex.practicum.filmorate.exception.ObjectExcistenceException;
-import ru.yandex.practicum.filmorate.storage.dao.GenreDaoImpl;
+import ru.yandex.practicum.filmorate.storage.dal.GenreStorage;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class GenreService {
 
-    private final GenreDaoImpl genreDao;
+    private final GenreStorage genreDao;
 
-    public Genre getGenreById(Integer genreId){
+    public Genre getGenreById(Integer genreId) {
         return genreDao.getGenreById(genreId)
                 .orElseThrow(() -> new ObjectExcistenceException("Жанра с таким id не существует"));
     }

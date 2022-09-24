@@ -4,14 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.characteristicsForFilm.Mpa;
 import ru.yandex.practicum.filmorate.exception.ObjectExcistenceException;
-import ru.yandex.practicum.filmorate.storage.dao.MpaDaoImpl;
+import ru.yandex.practicum.filmorate.storage.dal.MpaStorage;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class MpaService {
-    private final MpaDaoImpl mpaDao;
+    private final MpaStorage mpaDao;
 
     public Mpa getMpaById(Integer mpaId) {
         return mpaDao.getMpaById(mpaId)

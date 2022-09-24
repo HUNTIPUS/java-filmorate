@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class LikeDaoImpl  implements LikeStorage {
+public class LikeDaoImpl implements LikeStorage {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -22,6 +22,7 @@ public class LikeDaoImpl  implements LikeStorage {
                 "insert into LIKES (film_id, user_id)" +
                         "values (?, ?)";
         jdbcTemplate.update(sql, filmId, userId);
+        updateRate(filmId);
     }
 
     @Override
@@ -30,10 +31,10 @@ public class LikeDaoImpl  implements LikeStorage {
                 "select L.USER_ID " +
                         "from FILMS F " +
                         "join LIKES L on F.FILM_ID = L.FILM_ID " +
-                        "where F.FILM_ID = " + filmId;
+                        "where F.FILM_ID = ?";
 
         log.info("Просмотр всех id пользователей, которые лайкнули фильм с id = {}", filmId);
-        return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getInt("user_id"));
+        return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getInt("user_id"), filmId);
     }
 
     @Override
@@ -41,5 +42,12 @@ public class LikeDaoImpl  implements LikeStorage {
         String sql =
                 "delete from LIKES where FILM_ID = ? and USER_ID = ?";
         jdbcTemplate.update(sql, filmId, userId);
+        updateRate(filmId);
+    }
+
+    private void updateRate(long filmId) {
+        String sqlQuery = "update FILMS f set rate = " +
+                "(select count(l.user_id) from LIKES l where l.film_id = f.film_id)  where film_id = ?";
+        jdbcTemplate.update(sqlQuery, filmId);
     }
 }

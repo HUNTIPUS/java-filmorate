@@ -22,20 +22,16 @@ public class UserController {
 
     @PostMapping
     public User createUser(@RequestBody @Valid User user) {
-        if (user != null) {
-            if (doValidate(user)) {
-                log.info("Пользователь создан");
-                return userService.createUser(user);
-            }
-            return null;
-        } else {
-            throw new ValidationException("Передано пустое значение");
+        if (doValidate(user)) {
+            log.info("Пользователь создан");
+            return userService.createUser(user);
         }
+        return null;
     }
 
     @PutMapping
     public User updateUser(@RequestBody @Valid User user) {
-        if (user != null && user.getId() > 0) {
+        if (user.getId() > 0) {
             if (doValidate(user)) {
                 log.info("Пользователь обновился");
                 return userService.updateUser(user);

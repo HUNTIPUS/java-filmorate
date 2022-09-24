@@ -3,8 +3,6 @@ package ru.yandex.practicum.filmorate.storage.dao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.dal.UserStorage;
@@ -12,7 +10,6 @@ import ru.yandex.practicum.filmorate.storage.dal.UserStorage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -64,9 +61,9 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public Optional<User> getUserById(Integer userId) {
-        String sql = "select * from users where user_id = " + userId;
+        String sql = "select * from users where user_id = ?";
 
-        List<User> users = jdbcTemplate.query(sql, UserDbStorage::makeUser);
+        List<User> users = jdbcTemplate.query(sql, UserDbStorage::makeUser, userId);
 
         if (users.size() != 1) {
             return Optional.empty();

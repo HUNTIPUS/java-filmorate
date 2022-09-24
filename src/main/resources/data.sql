@@ -17,7 +17,6 @@ insert into status_friendship(status_name)
 values ('Не подтвержденный'),
        ('Подтвержденный');
 
-
 -- drop table if exists users cascade;
 -- drop table if exists films cascade;
 -- drop table if exists likes;
@@ -26,3 +25,7 @@ values ('Не подтвержденный'),
 -- drop table if exists genres cascade;
 -- drop table if exists film_genre;
 -- drop table if exists motion_picture_association cascade;
+
+
+
+
